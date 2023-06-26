@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react"
 
 function App() {
-    const [data, setData] = useState({
-        "Product ID": "12345",
-        "Name": "Reebok Shoes",
-    })
+    const [data, setData] = useState({})
 
     const queryData = async function () {
         try {
@@ -30,6 +27,15 @@ function App() {
 
     useEffect(() => {
         // queryData().then((data) => setData(data))
+        const _url = new URL(window.location)
+        const searchParams = new URLSearchParams(_url.search)
+        const key = searchParams.get("key").split("_")
+        const value = searchParams.get("value").split("_")
+        const modData = {}
+        key.forEach((key_elem, i) => modData[key_elem] = value[i])
+        setData(() => modData)
+        if(key.find(elem => elem == "id")) alert("Product has been verified!")
+        else alert("Product is fake!")
     }, [])
 
     // we need to show all the data that is present in the IPFS url link

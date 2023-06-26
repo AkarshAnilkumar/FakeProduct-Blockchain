@@ -7,6 +7,10 @@ function Post() {
         // create wallet
         // send some amount there
         // use the privateKey and the productID to create a link
+        alert("Submitted")
+        const url = `${window.location.href}/details?key=${inputData.map(elem => elem.key).join("_")}&value=${inputData.map(elem => elem.value).join("_")}`
+        window.location.pathname = `/qrcode?url=${url}` 
+
     }
 
     const addField = function () {
